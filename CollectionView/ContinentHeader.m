@@ -21,6 +21,10 @@
         self.label.backgroundColor = [UIColor clearColor];
         self.label.textAlignment = NSTextAlignmentCenter;
         [self addSubview:self.label];
+        
+        self.label.translatesAutoresizingMaskIntoConstraints = NO;
+        NSDictionary *viewDictionary = [[NSDictionary alloc] initWithObjectsAndKeys:self.label, @"label", nil];
+        [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[label]|" options:0 metrics:nil views:viewDictionary]];
     }
     return self;
 }

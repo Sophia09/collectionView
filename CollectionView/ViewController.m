@@ -26,4 +26,19 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (IBAction)pickFlag:(id)sender
+{
+    UICollectionViewController *flagPicker = [[FlagPickerViewController alloc] initWithDelegate:self];
+    [self presentViewController:flagPicker animated:YES completion:NULL];
+}
+
+#pragma mark - FlagPickerVieWControllerDelegate
+
+- (void)flagPicker:(FlagPickerViewController *)flagPickerViewController didFinishPickFlag:(Flag *)flag;
+{
+    self.countryLabel.text = flag.name;
+    self.countryFlag.image = flag.image;
+    [self dismissViewControllerAnimated:YES completion:NULL];
+}
+
 @end

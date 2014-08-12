@@ -18,4 +18,6 @@
 // Rotates the source image by the specified angle in radians.
 + (UIImage *)straightenImage:(UIImage *)image;
 
++ (UIImage *)findFaceInImage:(UIImage *)image;
+
 @end

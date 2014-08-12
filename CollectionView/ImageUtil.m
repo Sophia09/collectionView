@@ -72,4 +72,21 @@
     return outputImage;
 }
 
++ (UIImage *)findFaceInImage:(UIImage *)image
+{
+    CIImage *coreImage = [[CIImage alloc] initWithImage:image];
+    CIContext *context = [CIContext contextWithOptions:nil];
+    CIDetector *detector = [CIDetector detectorOfType:@"CIDetectorTypeFace"
+                                              context:context
+                                              options:[NSDictionary dictionaryWithObjectsAndKeys:@"CIDetectorAccuracyHigh", @"CIDetectorAccuracy", nil]];
+    NSArray *features = [detector featuresInImage:coreImage];
+    if ([features count] > 0)
+    {
+       CIImage *faceImage = [coreImage imageByCroppingToRect:[[features lastObject] bounds]];
+       UIImage *face = [UIImage imageWithCGImage:[context createCGImage:faceImage fromRect:faceImage.extent]];
+        return face;
+    }
+    return nil;
+}
+
 @end

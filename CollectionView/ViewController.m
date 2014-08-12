@@ -41,4 +41,24 @@
     [self dismissViewControllerAnimated:YES completion:NULL];
 }
 
+#pragma mark - Helper Methods
+
+- (UIImage *)aspectFillImage:(UIImage *)image toSize:(CGSize)size
+{
+    UIGraphicsBeginImageContext(size);
+    if (size.height <   image.size.height)
+    {
+        float ration = size.height / image.size.height;
+        [image drawInRect:CGRectMake(0, 0, image.size.width * ration, size.height)];
+    }
+    else
+    {
+        float ration = size.width / image.size.width;
+        [image drawInRect:CGRectMake(0, 0, size.width, image.size.height * ration)];
+    }
+    UIImage *aspectFillImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    return aspectFillImage;
+}
+
 @end
